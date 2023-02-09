@@ -1,0 +1,31 @@
+// Getting input via STDIN
+const readline = require("readline");
+
+const inp = readline.createInterface({
+  input: process.stdin
+});
+
+const userInput = [];
+
+inp.on("line", (data) => {
+  userInput.push(data);
+});
+
+inp.on("close", () => {
+ var request = new XMLHttpRequest();
+ request.open("GET", "https://restcountries.com/v3.1/all.")
+ request.send();
+ request.onload=function(){
+     var data = Json.parse(this.responsetext);
+     var result= data.reduce((acc,element) =>{
+         console.log(acc,element);
+         if(typeof acc ==='object')
+         {
+             return acc.population + element.population
+         }
+         return acc + element.population
+         })
+         console.log(result);
+     }
+ 
+});
